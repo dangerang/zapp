@@ -1,6 +1,6 @@
 ﻿@model IdeasIndexVM
 
-
+@Html.Partial("PopOutNavigation")
 <div class="text-center">
     <!--Start a project form-->
     @Html.Partial("StartProject", Model.LandingProjectModel)
@@ -16,3 +16,4 @@
             @Html.Partial("IdeaList", Model.IdeaListModel)
         </div>
     </div>
+</div>

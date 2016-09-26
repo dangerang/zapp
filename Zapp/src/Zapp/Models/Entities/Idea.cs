@@ -21,7 +21,7 @@ namespace Coddit.Models.Entities
         public string City { get; set; }
         public string GitHub { get; set; }
         public DateTime CreatedDate { get; set; }
-        //public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; }
 
         public virtual ICollection<AccountIdea> AccountIdea { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }

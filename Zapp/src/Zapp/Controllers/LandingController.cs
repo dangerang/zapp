@@ -37,6 +37,8 @@ namespace Coddit.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction(nameof(IdeasController.Index), "ideas");
             return View(new LandingIndexVM());
         }
 
