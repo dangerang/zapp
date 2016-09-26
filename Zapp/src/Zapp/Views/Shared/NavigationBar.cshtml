@@ -1,0 +1,23 @@
+﻿<link href="~/Styles/Navigationbar.css" rel="stylesheet" />
+
+<!-- sidebar -->
+
+<div id="sidebar">
+    <ul class="nav" id="menu">
+        <li class="menyicon">
+            <span class="collapse in hidden-xs darkmint">
+                <a asp-controller="ideas" asp-action="index">
+                    <img src="~/Images/Squiddlo_Design2.png" width="150" style="margin-top: 20px; margin-right:5px" />
+                </a>
+            </span>
+        </li>
+        <li class="menyicon" style="margin-top: 20px"><a href="#" onclick="SearchPartial()"><i class="fa fa-search fa-1x darkmint"></i> <span class="collapse in hidden-xs darkmint"> Search</span></a></li>
+        <li class="menyicon"><a asp-controller="account" asp-action="profile"><i class="fa fa-user fa-1x darkmint"></i><span class="collapse in hidden-xs darkmint"> My Profile</span></a></li>
+        <li class="menyicon"><a asp-controller="account" asp-action="profile"><i class="fa fa-lightbulb-o darkmint"></i><span class="collapse in hidden-xs darkmint"> Start a project</span></a></li>
+        <li class="menyicon"><a asp-controller="Ideas" asp-action="index"><i class="fa fa-diamond fa-1x darkmint"></i><span class="collapse in hidden-xs darkmint"> Explore</span></a></li>
+        <li class="menyicon"><a asp-controller="landing" asp-action="about"><i class="fa fa-hand-peace-o fa-1x darkmint"></i><span class="collapse in hidden-xs darkmint"> About Squiddlo</span></a></li>
+        <li class="menyicon"><a asp-controller="account" asp-action="logout"><i class="fa fa-power-off fa-1x darkmint"></i><span class="collapse in hidden-xs darkmint"> Log Out</span></a></li>
+    </ul>
+</div>
+
+

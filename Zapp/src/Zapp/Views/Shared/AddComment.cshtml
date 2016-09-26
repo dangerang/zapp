@@ -1,0 +1,10 @@
+﻿@model AddCommentVM
+
+<form asp-controller="ideas" asp-action="comment" style="margin: 20px">
+    <div class="form-group" style="display: inline">
+        <label asp-for="Text">Add new comment</label>
+        <input asp-for="Text" class="form-control" style="width: 67%">
+        <span asp-validation-for="Text"></span>
+ <button type="submit" class="btn btn-custom" style="display: inline; margin-top: 10px;"><i class="fa fa-check"></i></button>
+    </div>
+</form>

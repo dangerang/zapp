@@ -1,0 +1,18 @@
+﻿@model IdeasIndexVM
+
+
+<div class="text-center">
+    <!--Start a project form-->
+    @Html.Partial("StartProject", Model.LandingProjectModel)
+
+
+    <!--Where all projects rrr listed-->
+
+
+    <div class="portfolio-centered">
+        <div class="recentitems portfolio">
+
+
+            @Html.Partial("IdeaList", Model.IdeaListModel)
+        </div>
+    </div>

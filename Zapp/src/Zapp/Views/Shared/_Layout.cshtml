@@ -1,0 +1,44 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <link href="~/Styles/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+            <div class="col-2">
+                @Html.Partial("NavigationBar")
+
+            </div>
+            <div class="col-1">
+                <p><a data-toggle="offcanvas"><i class="fa fa-navicon fa-2x darkmint" style="position: fixed"></i></a></p>
+            </div>
+            <div class="col-8">
+                @RenderBody()
+            </div>
+            <div class="col-1">
+            </div>
+            <a href="#0" class="cd-top">Top</a>
+
+        </div>
+    </div>
+    <!-- /main -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//code.jquery.com/color/jquery.color-2.1.0.js"></script>
+    <script src="~/Scripts/Menubar.js"></script>
+    <script src="~/Scripts/Slide.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>

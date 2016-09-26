@@ -1,0 +1,97 @@
+﻿@model IdeaListVM[]
+
+<div class="card-deck-wrapper">
+    <div class="card-deck">
+        @for (int i = 0; i < 3; i++)
+        {
+            @if (Model[i].IsEnabled)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" style="float:left">@Model[i].Subject</h4>
+                        @Model[i].CreatedDate.ToString("d")
+                    </div>
+                    <div class="card-block">
+                       
+                        <p class="card-text">@Model[i].Description</p>
+                        <br />
+                        <p class="card-text">
+                            <small class="text-muted">
+                                @foreach (var member in Model[i].Members)
+                                {
+                                    @if (member.IsActive)
+                                    {
+                                        @if (member.IsCreator)
+                                        {
+                                            <label style="color:rebeccapurple; font-weight: bold">Created by:</label>
+                                        }
+                                        <label>@member.UserName</label>
+                                    }
+                                }
+                            </small>
+                            <br />
+                            <small class="text-muted">Supported By: 53 squiddlos</small>
+                            <br />
+                        </p>
+                        @foreach (var tag in Model[i].Tags)
+                        {
+                            <button type="button" class="btn-tag btn-sm">@tag</button>
+                        }
+                        <br />
+                        <br />
+                        <div class="progress" style="height: 10px">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:60%; background-color: #27BC99; height:10px; ">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div style="float: left">
+                            @if (Model[i].HasVoted)
+                            {
+                                <span id="vote-@Model[i].Id" class="glyphicon glyphicon-heart" onclick="ToggleVote(@Model[i].Id)" style="cursor:pointer; color: #9966ff; display:inline-block"></span>
+                            }
+                            else
+                            {
+                                <span id="vote-@Model[i].Id" class="glyphicon glyphicon-heart-empty" onclick="ToggleVote(@Model[i].Id)" style="cursor:pointer; color: #9966ff"></span>
+                            }
+                            <span id="rating-@Model[i].Id">@Model[i].Rating</span>
+                            <a asp-controller="ideas" asp-action="comment" asp-route-id="@Model[i].Id" id="nolink"><span class="glyphicon glyphicon-comment" style="margin-right: 3px; display:inline-block"></span></a>@Model[i].Comment
+
+                        </div>
+                        <button type="button" class="btn-custom btn-sm" style="float: right">Join</button>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+    </div>
+<script>
+    var ToggleVote = function (ideaId) {
+        $.post("/ideas/upvote/" + ideaId, function (data) {
+
+            var currentRating = parseInt($("#rating-" + ideaId).text());
+
+            if ($("#vote-" + ideaId).attr("class") == "glyphicon glyphicon-heart") {
+
+                $("#vote-" + ideaId)
+                    .removeClass("glyphicon glyphicon-heart")
+                    .addClass("glyphicon glyphicon-heart-empty");
+
+                $("#rating-" + ideaId).text(currentRating - 1);
+            }
+            else {
+                $("#vote-" + ideaId)
+                    .removeClass("glyphicon glyphicon-heart-empty")
+                    .addClass("glyphicon glyphicon-heart");
+
+                $("#rating-" + ideaId).text(currentRating + 1);
+            }
+        })
+     .fail(function () {
+         alert("something went wrong");
+     });
+    }
+</script>

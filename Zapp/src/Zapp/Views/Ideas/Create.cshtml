@@ -1,0 +1,71 @@
+﻿@model IdeaCreateVM
+<style>
+    #tags {
+        margin-left: 15px;
+    }
+</style>
+<div class="card" style="text-align:left !important">
+    <div class="card-header" style="text-align: left">
+        <h4 class="card-title"><i class="fa fa-lightbulb-o"></i>Start a Project</h4> 
+    </div>
+    <form asp-controller="ideas" asp-action="create" class="form">
+        <div class="card-block">
+            <div class="form-group">
+                <label asp-for="Subject">This is what my app is about</label>
+                <input asp-for="Subject" class="form-control">
+                <span asp-validation-for="Subject"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">The details</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags">Tags</label>
+                <input asp-for="Tags" id="newTag" onkeypress="return enterKeyPress(event)"class="form-control" style="width: 40%; display:inline-block" />
+                <span asp-validation-for="Tags"></span>
+                <input type="hidden" id="hiddenTags" name="newTags" />
+                <button type="button" class="btn btn-custom btn-sm" onclick="addTag()"><span class="fa fa-plus"></span></button>
+                <br />
+                <div id="tags"></div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-custom btn-sm"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var tagList = [];
+
+    function enterKeyPress(e) {
+        if (e.keyCode == 13) {
+            addTag();
+            return false;
+        }
+    }
+
+    function addTag() {
+        var inputValue = $("#newTag").val();
+
+        // Checks if the inputted value contains anything other than whitespace/empty
+        if (/\S/.test(inputValue)) {
+            var newButton = document.createElement("button");
+            newButton.innerHTML = inputValue;
+            tagList.push(inputValue);
+            $('#tags').append(newButton);
+            $(newButton)
+                .addClass("btn btn-tag btn-sm")
+                .addClass("btnConfig")
+                .attr("type", "button");
+
+            //$("#tags").append('<span class="glyphicon glyphicon-remove" style="color:darkred;"></span>');
+
+            $("#newTag").val("");
+
+            $("#hiddenTags").val(tagList.join(','));
+        }
+    }
+</script>

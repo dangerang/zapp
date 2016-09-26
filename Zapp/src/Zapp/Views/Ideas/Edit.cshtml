@@ -1,0 +1,14 @@
+﻿@model IdeaEditVM
+<form asp-controller="ideas" asp-action="edit">
+    <div class="form-group">
+        <label asp-for="Subject">Subject</label>
+        <input asp-for="Subject" class="form-control">
+        <span asp-validation-for="Subject"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+    <button type="submit" class="btn btn-default">Save Changes</button>
+</form>

@@ -1,0 +1,64 @@
+﻿@model AccountEditVM
+<style>
+    .btn-success {
+        margin: 4px;
+    }
+</style>
+<div class="card" style="text-align:left !important">
+    <div class="card-header" style="text-align: left">
+        Edit Profile
+    </div>
+        <form asp-controller="account" asp-action="edit">
+    <div class="card-block">
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Add Skills</label>
+                <input type="text" id="newSkill" class="form-control" style="width: 40%; display:inline-block" />
+                <button type="button" class="btn btn-custom btn-sm" onclick="addTag()"><span class="fa fa-plus"></span></button>
+                <div id="tags">
+                    @if (Model.Tags != null)
+                    {
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <button type="button" class="btn btn-sm" style="background-color:#83E8BA; font-weight: bold;">@tag</button>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="IsProgrammer"></label>
+                <input asp-for="IsProgrammer" />
+            </div>
+            <br />
+    </div>
+    <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-custom btn-sm">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save Changes
+            </button>
+    </div>
+        </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+<script>
+    var tagList = [];
+
+    function addTag() {
+        var newButton = document.createElement("button");
+        newButton.innerHTML = $("#newSkill").val();
+        tagList.push($("#newSkill").val());
+        $('#tags').append(newButton);
+        $(newButton).addClass("btn-tag btn-sm").attr("type", "button");
+        $('#newSkill').val("");
+    }
+</script>

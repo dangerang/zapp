@@ -1,0 +1,40 @@
+﻿@model IdeaCreateVM
+
+<link href="~/Styles/Idea.css" rel="stylesheet" />
+<style>
+    .btnConfig {
+        margin: 5px;
+    }
+</style>
+<div class="card" style="text-align:left !important">
+    <div class="card-header" style="text-align: center; background-color:#27BC99 !important;" 0px !important">
+     <h1>Start a project</h1>
+    </div>
+    <form asp-controller="ideas" asp-action="create" class="form">
+        <div class="card-block">
+            <div class="form-group">
+                <label asp-for="Subject">I call my app-idea</label>
+                <input asp-for="Subject" class="form-control">
+                <span asp-validation-for="Subject"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">The details</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags">Tag</label>
+                <input asp-for="Tags" id="newTag" onkeypress="return enterKeyPress(event)" class="form-control" style="width: 40%; display:inline-block" />
+                <span asp-validation-for="Tags"></span>
+                <input type="hidden" id="hiddenTags" name="newTags" />
+                <button type="button" class="btn btn-custom btn-sm" onclick="addTag()"><span class="fa fa-plus"></span></button>
+                <br />
+                <div id="tags"></div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-custom btn-lg"><i class="fa fa-check" aria-hidden="true"></i>Submit</button>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/TagsController.js"></script>

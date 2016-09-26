@@ -1,0 +1,30 @@
+﻿<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<link href="~/Styles/CommentField.css" rel="stylesheet" />
+
+<div class="allcontent" style="margin-left: 300px">
+
+    <div class="container">
+        <div style="text-align: left !important; margin-bottom: 20px"> @Html.Partial("AddComment", new AddCommentVM())</div>
+    </div>
+
+    <br />
+    <br />
+    <div class="container">
+        @Html.Partial("CommentField")
+    </div>
+
+
+    <script>
+        var RemoveComment = function (commentId) {
+            $("." + commentId).hide();
+            $.post("/ideas/RemoveComment/" + commentId, function (data) {
+                $("." + commentId).remove();
+
+            })
+         .fail(function () {
+             $("." + commentId).show();
+             alert("could not delete comment");
+         });
+        }
+    </script>
+</div>
