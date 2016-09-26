@@ -1,0 +1,17 @@
+﻿@model IdeasIndexVM
+
+@Html.Partial("IdeasIndexNavBar")
+
+<div class="text-center" style="padding-top: 10%">
+    <!--Start a project form-->
+    @Html.Partial("StartProject", Model.LandingProjectModel)
+
+    <!--Orderby Buttons-->
+    <div style="margin: 15px; text-align: center">
+        <a asp-controller="ideas" asp-action="orderbyrating" class="btn btn-custom btn-sm">Order by rating</a>
+        <a asp-controller="ideas" asp-action="index" class="btn btn-custom btn-sm">Order by date</a>
+    </div>
+
+    <!--Where all projects rrr listed-->
+    @Html.Partial("IdeaList", Model.IdeaListModel)
+</div>

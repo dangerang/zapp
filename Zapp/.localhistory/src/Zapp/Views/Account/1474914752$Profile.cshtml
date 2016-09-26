@@ -1,0 +1,87 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutAuthorized.cshtml";}
+@model AccountProfileVM
+<link href="~/assets/css/profile.css" rel="stylesheet" />
+<div class="text-center">
+
+    @Html.Partial("ProfileHeader")
+</div>
+<script src="~/assets/js/profile.js"></script>
+@*<link href="~/Styles/style.css" rel="stylesheet" />
+    <link href="~/Styles/Idea.css" rel="stylesheet" />
+
+    <div class="card" style="text-align:left !important">
+        <div class="card-header" style="text-align: left">
+            Profile<h4 class="card-title"> @Model.Username</h4>
+        </div>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-md-3"><img src="@Model.ProfilePic" width="200" height="200"/>
+                    @if (Model.IsProgrammer)
+                    {
+                        <img src="~/Images/bagde2.png" style="position: relative; top: -220px; left: 40px" />
+                    }
+                </div>
+                <div class="col-md-9"><p class="card-text">@Model.Description</p></div>
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <hr />
+                    <h6><b>Email</b> @Model.Email</h6>
+                    @if (Model.Tags != null)
+                    {
+                    <hr />
+                    <b>Skills</b>
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <button type="button" class="btn btn-sm" style="background-color:#83E8BA; font-weight: bold;">@tag</button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <div>
+                <a asp-controller="account" onclick="confirmDelete()" class="btn btn-custom btn-sm" style="float: left"><i class="fa fa-close"></i> Remove Account</></a>
+                <a asp-controller="account" asp-action="edit" asp-route-id="@Model.Id" class="btn btn-custom btn-sm" style="margin-right:5px"><i class="fa fa-pencil"></i> Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-header" style="text-align: left">
+            Posted and joined ideas:
+        </div>
+        <div class="card-block" style="text-align: left">
+            <table class="table table-hover">
+                <thead style="font-weight:bold !important">
+                    <tr>
+                        <td width="20%">Subject</td>
+                        <td width="60%">Description</td>
+                        <td width="10%">Date Posted</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var idea in Model.MyIdeas)
+                    {
+                        <tr>
+                            <td>@idea.Subject</td>
+                            <td>@idea.Description</td>
+                            <td>@idea.CreatedDate.ToString("d")</td>
+                            <td><span class="glyphicon glyphicon-heart" style="color: #9966ff; font-size: 14px; margin-right: 3px; display: inline"></span><p style="font-family: 'Open Sans'; text-align: center; display: inline"> @idea.Rating</p></td>
+                            <td><span class="glyphicon glyphicon-comment" style="font-size: 14px; margin-right: 3px; display: inline"></span><p style="font-family: 'Open Sans'; text-align: center; display: inline"> @idea.Comment</p></td>
+                            <td><i class="fa fa-pencil"/></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function confirmDelete() {
+            confirm("Are you sure you want to delete your account? Your created ideas will no longer be visible to the other users.");
+        }
+    </script>*@

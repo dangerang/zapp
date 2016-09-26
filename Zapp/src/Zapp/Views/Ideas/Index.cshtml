@@ -1,19 +1,16 @@
-﻿@model IdeasIndexVM
+﻿@{ Layout = "~/Views/Shared/_LayoutAuthorized.cshtml";}
+@model IdeasIndexVM
 
-@Html.Partial("PopOutNavigation")
-<div class="text-center">
+<div class="text-center" style="padding-top: 10%">
     <!--Start a project form-->
     @Html.Partial("StartProject", Model.LandingProjectModel)
 
+    <!--Orderby Buttons-->
+    <div style="margin: 15px; text-align: center">
+        <a asp-controller="ideas" asp-action="orderbyrating" class="btn btn-custom btn-sm">Order by rating</a>
+        <a asp-controller="ideas" asp-action="index" class="btn btn-custom btn-sm">Order by date</a>
+    </div>
 
     <!--Where all projects rrr listed-->
-
-
-    <div class="portfolio-centered">
-        <div class="recentitems portfolio">
-
-
-            @Html.Partial("IdeaList", Model.IdeaListModel)
-        </div>
-    </div>
+    @Html.Partial("IdeaList", Model.IdeaListModel)
 </div>

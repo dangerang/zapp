@@ -1,0 +1,277 @@
+﻿@model IdeaListVM[]
+
+<script>
+    var design = "C:\Users\Administrator\Source\Repos\zapp\Zapp\src\Zapp\wwwroot\assets\img\portfolio\portfolio_10.jpg";
+    var it = "C:\Users\Administrator\Source\Repos\zapp\Zapp\src\Zapp\wwwroot\assets\img\portfolio\portfolio_9.jpg";
+    var other = "C:\Users\Administrator\Source\Repos\zapp\Zapp\src\Zapp\wwwroot\assets\img\portfolio\portfolio_8.jpg";
+    var category = ["design", "it", "other"];
+</script>
+
+@*TODO: On creating projects you can't publish a project without adding tags:(*@
+<div id="portfoliowrap">
+    <div class="portfolio-centered">
+        <div class="recentitems portfolio">
+
+            @foreach (var item in Model)
+            {
+                @if (item.IsEnabled)
+                {
+                    <div class="portfolio-item graphic-design">
+                        <div class="he-wrap tpl6">
+                            @if (item.Category == design)
+                            {
+                                /**/
+                            }
+
+                            <img src="assets/img/portfolio/portfolio_09.jpg" alt="">
+                            <div class="he-view">
+                                <div class="bg a0" data-animate="fadeIn">
+                                    <h3 class="a1" data-animate="fadeInDown">@item.Subject</h3>
+                                    <h5>@item.CreatedDate.ToString("d")</h5>
+                                    <p>@item.Description</p>
+
+                                    @foreach (var member in item.Members)
+                                    {
+                                        @if (member.IsActive)
+                                        {
+                                            @if (member.IsCreator)
+                                            {
+                                                <label style="font-weight: bold">OP: </label>
+                                            }
+                                            @member.UserName
+                                            <br />
+                                        }
+                                    }
+
+                                    @foreach (var tag in item.Tags)
+                                    {
+                                        <span class="label label-default">@tag</span>
+                                    }
+
+                                    <br />
+                                    @if (item.HasVoted)
+                                    {
+                                        <span id="vote-@item.Id" class="glyphicon glyphicon-heart" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff; display:inline-block"></span>
+                                    }
+                                    else
+                                    {
+                                        <span id="vote-@item.Id" class="glyphicon glyphicon-heart-empty" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff"></span>
+                                    }
+                                    <span id="rating-@item.Id">@item.Rating</span>
+                                    <a asp-controller="ideas" asp-action="comment" asp-route-id="@item.Id" id="nolink"><span class="glyphicon glyphicon-comment" style="margin-right: 3px; display:inline-block"></span></a>@item.Comment
+
+                                    <br />
+                                    <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_09.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                    <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                                </div><!-- he bg -->
+                            </div><!-- he view -->
+                        </div><!-- he wrap -->
+                    </div><!-- end col-12 -->
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@*<div class="card-footer">
+                            <div style="float: left">
+                                @if (item.HasVoted)
+                                {
+                                    <span id="vote-@item.Id" class="glyphicon glyphicon-heart" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff; display:inline-block"></span>
+                                }
+                                else
+                                {
+                                    <span id="vote-@item.Id" class="glyphicon glyphicon-heart-empty" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff"></span>
+                                }
+                                <span id="rating-@item.Id">@item.Rating</span>
+                                <a asp-controller="ideas" asp-action="comment" asp-route-id="@item.Id" id="nolink"><span class="glyphicon glyphicon-comment" style="margin-right: 3px; display:inline-block"></span></a>@item.Comment
+
+                            </div>
+                            <button type="button" class="btn-custom btn-sm" style="float: right">Join</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+        }
+    </div>*@
+
+@*<div @*class="card-deck-wrapper">
+        <div style="margin-bottom: 15px">
+            <a asp-controller="ideas" asp-action="orderbyrating" class="btn btn-custom btn-sm">Order by rating</a>
+            <a asp-controller="ideas" asp-action="index" class="btn btn-custom btn-sm">Order by date</a>
+        </div>
+        @foreach (var item in Model)
+        {
+            @if (item.IsEnabled)
+            {
+                <div class="card-deck" style="margin-bottom: 35px">
+                    <div class="card" style="display: block; margin: auto; width: 75%">
+                        <div class="card-header">
+                            <h4 class="card-title" style="float:left">@item.Subject</h4>
+                            @item.CreatedDate.ToString("d")
+                        </div>
+                        <div class="card-block">
+                            @foreach (var member in item.Members)
+                            {
+                                @if (member.IsActive)
+                                {
+                                    @if (member.IsCreator)
+                                    {
+                                        <label style="color:rebeccapurple; font-weight: bold">Creator:</label>
+                                    }
+                                    <label>@member.UserName</label>
+                                    <br />
+                                }
+                            }
+                            <p class="card-text">@item.Description</p>
+
+                            @foreach (var tag in item.Tags)
+                            {
+                                <button type="button" class="btn-tag btn-sm">@tag</button>
+                            }
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div style="float: left">
+                                @if (item.HasVoted)
+                                {
+                                    <span id="vote-@item.Id" class="glyphicon glyphicon-heart" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff; margin-right: 5px; display:inline-block"></span>
+                                }
+                                else
+                                {
+                                    <span id="vote-@item.Id" class="glyphicon glyphicon-heart-empty" onclick="ToggleVote(@item.Id)" style="cursor:pointer; color: #9966ff; margin-right: 5px"></span>
+                                }
+                                <span id="rating-@item.Id">@item.Rating</span>
+                                <a asp-controller="ideas" asp-action="comment" asp-route-id="@item.Id"><span class="glyphicon glyphicon-comment" style="margin-right: 5px" /><p style="font-family:'Open Sans' !important; font-weight:600; display:inline-block">  @item.Comment</p></a>
+                            </div>
+                            <button type="button" class="btn-custom btn-sm" style="float: right">
+     this idea</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>*@
+<script>
+
+    // Portfolio
+    (function ($) {
+        "use strict";
+        var $container = $('.portfolio'),
+            $items = $container.find('.portfolio-item'),
+            portfolioLayout = 'fitRows';
+
+        if ($container.hasClass('portfolio-centered')) {
+            portfolioLayout = 'masonry';
+        }
+
+        $container.isotope({
+            filter: '*',
+            animationEngine: 'best-available',
+            layoutMode: portfolioLayout,
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            },
+            masonry: {
+            }
+        }, refreshWaypoints());
+
+        function refreshWaypoints() {
+            setTimeout(function () {
+            }, 1000);
+        }
+
+        $('nav.portfolio-filter ul a').on('click', function () {
+            var selector = $(this).attr('data-filter');
+            $container.isotope({ filter: selector }, refreshWaypoints());
+            $('nav.portfolio-filter ul a').removeClass('active');
+            $(this).addClass('active');
+            return false;
+        });
+
+        function getColumnNumber() {
+            var winWidth = $(window).width(),
+            columnNumber = 1;
+
+            if (winWidth > 1200) {
+                columnNumber = 5;
+            } else if (winWidth > 950) {
+                columnNumber = 4;
+            } else if (winWidth > 600) {
+                columnNumber = 3;
+            } else if (winWidth > 400) {
+                columnNumber = 2;
+            } else if (winWidth > 250) {
+                columnNumber = 1;
+            }
+            return columnNumber;
+        }
+
+        function setColumns() {
+            var winWidth = $(window).width(),
+            columnNumber = getColumnNumber(),
+            itemWidth = Math.floor(winWidth / columnNumber);
+
+            $container.find('.portfolio-item').each(function () {
+                $(this).css({
+                    width: itemWidth + 'px'
+                });
+            });
+        }
+
+        function setPortfolio() {
+            setColumns();
+            $container.isotope('reLayout');
+        }
+
+        $container.imagesLoaded(function () {
+            setPortfolio();
+        });
+
+        $(window).on('resize', function () {
+            setPortfolio();
+        });
+    })(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var ToggleVote = function (ideaId) {
+        $.post("/ideas/upvote/" + ideaId, function (data) {
+
+            var currentRating = parseInt($("#rating-" + ideaId).text());
+
+            if ($("#vote-" + ideaId).attr("class") == "glyphicon glyphicon-heart") {
+
+                $("#vote-" + ideaId)
+                    .removeClass("glyphicon glyphicon-heart")
+                    .addClass("glyphicon glyphicon-heart-empty");
+
+                $("#rating-" + ideaId).text(currentRating - 1);
+            }
+            else {
+                $("#vote-" + ideaId)
+                    .removeClass("glyphicon glyphicon-heart-empty")
+                    .addClass("glyphicon glyphicon-heart");
+
+                $("#rating-" + ideaId).text(currentRating + 1);
+            }
+        })
+     .fail(function () {
+         alert("something went wrong");
+     });
+    }
+</script>

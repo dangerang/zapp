@@ -18,9 +18,9 @@ namespace Coddit.Models.Entities
         public string Description { get; set; }
         public int CreatorId { get; set; }
         public string Uploads { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string City { get; set; }
         public string GitHub { get; set; }
-        public DateTime CreatedDate { get; set; }
         public bool IsEnabled { get; set; }
 
         public virtual ICollection<AccountIdea> AccountIdea { get; set; }
